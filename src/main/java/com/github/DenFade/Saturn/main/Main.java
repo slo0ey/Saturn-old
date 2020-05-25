@@ -1,5 +1,6 @@
 package com.github.DenFade.Saturn.main;
 
+import com.github.DenFade.Saturn.ms.MineSweeper;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -15,16 +16,19 @@ public class Main {
 
     public static void main(String[] args){
 
+        MineSweeper ms = new MineSweeper(16,16,40);
         Properties p = new Properties();
         try{
             FileInputStream fis = new FileInputStream(BOT_CONFIGURATION);
-            p.load((InputStream) fis);
+            p.load(fis);
 
             JDA jda = JDABuilder.createDefault(p.getProperty("token"))
                     .addEventListeners(new STListener())
                     .setActivity(Activity.of(Activity.ActivityType.DEFAULT, p.getProperty("activity-desc")))
                     .setStatus(OnlineStatus.ONLINE)
                     .build();
+            ms.setMine();
+            System.err.println(ms.toString());
             System.out.println("Success to start ;)");
 
         } catch (Exception e){
