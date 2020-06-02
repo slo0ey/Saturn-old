@@ -1,13 +1,13 @@
 package com.github.DenFade.Saturn.main;
 
 import com.github.DenFade.Saturn.ms.MineSweeper;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.*;
 
 public class Main {
