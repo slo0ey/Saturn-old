@@ -1,14 +1,14 @@
-package com.github.DenFade.Saturn.ms;
+package com.github.DenFade.Saturn.entity.game;
+
+import com.github.DenFade.Saturn.entity.IEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-public class MineSweeper {
+public class MineSweeper extends IEntity {
 
     private int x;
     private int y;
@@ -94,6 +94,9 @@ public class MineSweeper {
         } else {
             if(this.table[y][x].tile == BOMB){
                 this.end = true;
+            } else if(this.table[y][x].tile == 0){
+                this.table[y][x].opened = true;
+                access3x3(x, y, this::open);
             } else {
                 this.table[y][x].opened = true;
             }
@@ -110,7 +113,7 @@ public class MineSweeper {
         }
     }
 
-    private class Cell{
+    private static class Cell{
 
         int tile;
         boolean flag;
@@ -137,12 +140,12 @@ public class MineSweeper {
 
     @Override
     public String toString() {
-        String t = "";
+        StringBuilder t = new StringBuilder();
         for(int i = 0; i < this.y; i++){
             for(int k = 0; k < this.x; k++){
-                t += this.table[i][k].tile;
+                t.append(this.table[i][k].tile);
             }
-            t+="\n";
+            t.append("\n");
         }
         return "-- "+this.x+"x"+this.y+"/"+this.b+" Game--\n\n"+t;
 

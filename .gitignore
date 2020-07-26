@@ -8,7 +8,10 @@ atlassian-ide-plugin.xml
 !.gitignore
 
 # Bot Setting Files
-setting/*.properties
+setting/
+
+# Bot Database Files
+database/*.json
 
 # Target Folder
 target/
