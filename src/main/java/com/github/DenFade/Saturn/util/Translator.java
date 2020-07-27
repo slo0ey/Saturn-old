@@ -30,7 +30,7 @@ public class Translator {
         try {
             script = new String(translator.get(l).getProperty(key).getBytes(StandardCharsets.ISO_8859_1), "euc-kr");
         } catch (UnsupportedEncodingException e) {
-            script = "An error occurred while encoding :(";
+            script = "---";
         }
         translate.accept(script, what);
     }
@@ -40,12 +40,16 @@ public class Translator {
         Properties prop = translator.get(l);
         String[] script = new String[keys.length];
         for (int i = 0; i < keys.length; i++) {
-            script[i] = prop.getProperty(keys[i]);
+            try {
+                script[i] = new String(translator.get(l).getProperty(keys[i]).getBytes(StandardCharsets.ISO_8859_1), "euc-kr");
+            } catch (UnsupportedEncodingException e){
+                script[i] = "---";
+            }
         }
         translate.accept(script, what);
     }
 
-    public static int size(){
+    public static int getSupportLanguageCount(){
         return translator.size();
     }
 

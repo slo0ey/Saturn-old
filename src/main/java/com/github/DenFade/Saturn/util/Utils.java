@@ -17,4 +17,16 @@ public class Utils {
             return replacer;
         }
     }
+
+    public static String timeIndicator(long mills){
+        if(mills < 60*1000){
+            return mills/1000 + "s";
+        } else if(mills < 60*60*1000){
+            return mills/60_000 + "m";
+        } else if(mills < 24*60*60*1000){
+            return mills/3_600_000 + "h";
+        } else {
+            return mills/86_400_000 + "d";
+        }
+    }
 }

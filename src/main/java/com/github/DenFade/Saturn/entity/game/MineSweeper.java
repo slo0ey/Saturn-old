@@ -1,6 +1,7 @@
 package com.github.DenFade.Saturn.entity.game;
 
 import com.github.DenFade.Saturn.entity.IEntity;
+import com.github.DenFade.Saturn.util.EmojiFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,20 +13,28 @@ public class MineSweeper extends IEntity {
 
     private final int x;
     private final int y;
+    private final int rate;
     private final int b;
     private final int size;
-    private boolean end = false;
+    private boolean die = false;
     private final Cell[][] table;
     private static final int BOMB = 9;
     private static final int[][] around = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    private static final String[] emoji = {EmojiFactory.BLUE_SQUARE.getEmoji(), ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:",":eight:", EmojiFactory.BOMB.getEmoji(), EmojiFactory.TRIANGULAR_FLAG_ON_POST.getEmoji(), EmojiFactory.WHITE_LARGE_SQUARE.getEmoji(), EmojiFactory.COLLISION.getEmoji()};
 
     private final String ownerId;
     private String messageId;
 
-    public MineSweeper(int x, int y, int b, String ownerId){
+    private final long startAt;
+    private int leftTile;
+    private int leftBomb;
+    private final List<String> participants = new ArrayList<>();
+
+    public MineSweeper(int x, int y, int rate, String ownerId){
         this.x = x;
         this.y = y;
-        this.b = b;
+        this.rate = rate;
+        this.b = (x*y*(rate+10))/100+1;
         this.size = x*y;
         this.table = new Cell[y][x];
         this.ownerId = ownerId;
@@ -34,9 +43,13 @@ public class MineSweeper extends IEntity {
                 this.table[i][k] = new Cell(0, false, false);
             }
         }
+        this.startAt = System.currentTimeMillis();
+        this.leftTile = this.size - this.b;
+        this.leftBomb = this.b;
+        this.participants.add(ownerId);
     }
 
-    protected boolean isSafe(int x, int y){
+    public boolean isSafe(int x, int y){
         return x >= 0 && x < this.x && y >= 0 && y < this.y;
     }
 
@@ -69,7 +82,7 @@ public class MineSweeper extends IEntity {
     }
 
     public void setMine(){
-        ArrayList<Integer> arr = new ArrayList<>();
+        List<Integer> arr = new ArrayList<>();
         List<Integer> bombs;
         for(int i = 0; i < this.size; i++) arr.add(i);
         Collections.shuffle(arr);
@@ -84,8 +97,8 @@ public class MineSweeper extends IEntity {
         }
     }
 
-    public void open(int x, int y){
-        if(!isSafe(x, y)) return;
+    public Display open(int x, int y){
+        if(!isSafe(x, y)) return Display.ONGOING;
         else if(this.table[y][x].opened){
             if(this.table[y][x].tile > 0 && this.table[y][x].tile < 9){
                 int count = access3x3s(x, y, (nx, ny) -> this.table[ny][nx].flag);
@@ -95,15 +108,21 @@ public class MineSweeper extends IEntity {
                     });
                 }
             }
+            return Display.ONGOING;
         } else {
             if(this.table[y][x].tile == BOMB){
-                this.end = true;
+                this.die = true;
+                return Display.DIED;
             } else if(this.table[y][x].tile == 0){
                 this.table[y][x].opened = true;
+                leftTile--;
                 access3x3(x, y, this::open);
             } else {
                 this.table[y][x].opened = true;
+                leftTile--;
             }
+
+            return leftTile == 0 ? Display.COMPLETED : Display.ONGOING;
         }
     }
 
@@ -112,9 +131,79 @@ public class MineSweeper extends IEntity {
         else {
             Cell cur = this.table[y][x];
             if(!cur.opened){
-                this.table[y][x].flag = !cur.flag;
+                boolean f = cur.flag;
+                if(f){
+                    this.table[y][x].flag = false;
+                    leftBomb++;
+                } else {
+                    this.table[y][x].flag = true;
+                    leftBomb--;
+                }
+
             }
         }
+    }
+
+    public String display(Display mode){
+        StringBuilder dis = new StringBuilder();
+        for (int i = 0; i < this.y; i++) {
+            dis.append("\n");
+            for (int j = 0; j < this.x; j++) {
+                Cell current = this.table[i][j];
+                switch (mode){
+                    case ONGOING:
+                        if(current.opened) dis.append(emoji[current.tile]);
+                        else {
+                            if(current.flag) dis.append(emoji[10]);
+                            else dis.append(emoji[11]);
+                        }
+                        break;
+                    case DIED:
+                        if((current.opened && current.tile == BOMB) || (current.flag && current.tile != BOMB)) dis.append(emoji[12]);
+                        else {
+                            if(current.flag) dis.append(emoji[10]);
+                            else dis.append(emoji[current.tile]);
+                        }
+                        break;
+                    case COMPLETED:
+                        dis.append(current.flag ? emoji[10] : emoji[current.tile]);
+                        break;
+                }
+            }
+        }
+        return dis.toString();
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getBomb() {
+        return b;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public long getStartAt() {
+        return startAt;
+    }
+
+    public int getLeftBomb() {
+        return leftBomb;
+    }
+
+    public List<String> getParticipants() {
+        return participants;
+    }
+
+    public void addParticipants(String id){
+        participants.add(id);
     }
 
     public String getOwnerId() {
@@ -165,5 +254,15 @@ public class MineSweeper extends IEntity {
         }
         return "-- "+this.x+"x"+this.y+"/"+this.b+" Game--\n\n"+t;
 
+    }
+
+    public enum Display{
+        ONGOING, DIED, COMPLETED;
+
+
+        @Override
+        public String toString() {
+            return this.name();
+        }
     }
 }

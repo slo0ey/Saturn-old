@@ -13,6 +13,7 @@ import com.github.DenFade.Saturn.util.Translator;
 import com.github.DenFade.Saturn.util.Utils;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @CommandProperties(level = PermissionLevel.VERIFIED)
 @CommandDoc(
@@ -33,7 +34,7 @@ public class CreateNewMineSweeper extends IGuildCommand {
                 }));
         if(b){
             if (!Bot.minesweeperCenter().has(mergedIds)) {
-                final int x, y, rate, bomb;
+                final int x, y, rate;
                 int x1, y1, rate1;
                 switch (splitted.length) {
                     case 2:
@@ -70,14 +71,21 @@ public class CreateNewMineSweeper extends IGuildCommand {
                 }
                 x = x1;
                 y = y1;
-                rate = rate1 + 10;
-                bomb = ((x * y * rate) / 100) + 1;
-                MineSweeper ms = new MineSweeper(x, y, bomb, event.getUser().getId());
-                Bot.minesweeperCenter().register(mergedIds, ms);
+                rate = rate1;
+                final MineSweeper ms = new MineSweeper(x, y, rate, event.getUser().getId());
+                ms.setMine();
+                final MineSweeper.Display display = MineSweeper.Display.ONGOING;
 
-                Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_start_create_new", event, (s, ievent) -> {
-                    ievent.getTextChannel().sendMessage(String.format(s, x, y, bomb, EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), rate - 10)).queue();
+                Translator.doOnTranslate(event.getConfiguration().getLang(), new String[]{"ms_start_create_new", "ms_ongoing_script"}, event, (s, ievent) -> {
+                    ievent.getTextChannel().sendMessage(String.format(s[0], EmojiFactory.TRIANGULAR_FLAG_ON_POST.getEmoji())).queue();
+                    ievent.getTextChannel().sendMessage(
+                            String.format(s[1], ms.getX(), ms.getY(), ms.getBomb(), EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), ms.getRate(), display, ms.display(display), ms.getLeftBomb(), 1, "0s"))
+                                .queueAfter(3000, TimeUnit.MILLISECONDS, m -> {
+                                    String id = m.getId();
+                                    ms.setMessageId(id);
+                                });
                 });
+                Bot.minesweeperCenter().register(mergedIds, ms);
             } else {
                 Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_start_already_started", event, (s, ievent) -> {
                     ievent.getTextChannel().sendMessage(String.format(s, EmojiFactory.CONFUSED_FACE.getEmoji())).queue();

@@ -83,7 +83,7 @@ public class SaturnListener extends ListenerAdapter {
                     })
                     .execute();
         } catch (NegativeUserException e) {
-            //TODO: Need to handle
+            return;
         } catch (UnverifiedServerException e) {
             Translator.doOnTranslate(Translator.Language.EN, "unverified_server", channel, (s, textChannel) -> {
                 textChannel.sendMessage(s).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());

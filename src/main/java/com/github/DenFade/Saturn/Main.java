@@ -1,6 +1,7 @@
 package com.github.DenFade.Saturn;
 
 import com.github.DenFade.Saturn.entity.command.minesweeper.CreateNewMineSweeper;
+import com.github.DenFade.Saturn.entity.command.minesweeper.OpenTileInMineSweeper;
 import com.github.DenFade.Saturn.entity.command.server.ChangeServerLanguage;
 import com.github.DenFade.Saturn.entity.command.server.InitServerConfiguration;
 import com.github.DenFade.Saturn.entity.command.minesweeper.RegisterMineSweeperChannel;
@@ -32,7 +33,7 @@ public class Main {
             logWithTimestamp("Injecting Translations...");
             Translator.register(Translator.Language.KR);
             Translator.register(Translator.Language.EN);
-            logWithTimestamp("Successful injection\n%d Language now support", Translator.size());
+            logWithTimestamp("Successful injection\n%d Language now support", Translator.getSupportLanguageCount());
 
 
 
@@ -42,7 +43,8 @@ public class Main {
                     .register("saturn.language", new ChangeServerLanguage())
                     .register("ms.on", new RegisterMineSweeperChannel())
                     .register("ms.off", new UnregisterMineSweeperChannel())
-                    .register("ms.new", new CreateNewMineSweeper());
+                    .register("ms.new", new CreateNewMineSweeper())
+                    .register("ms.o", new OpenTileInMineSweeper());
             logWithTimestamp("Successful injection\n%d GuildCommand now available", Bot.commandCenter().size());
 
 

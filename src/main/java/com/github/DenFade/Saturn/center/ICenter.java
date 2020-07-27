@@ -17,10 +17,6 @@ public class ICenter<K, V>{
         map.remove(key);
     }
 
-    public void unregister(K key, V entity){
-        map.remove(key, entity);
-    }
-
     @Nullable
     public V find(K key){
         return map.get(key);
