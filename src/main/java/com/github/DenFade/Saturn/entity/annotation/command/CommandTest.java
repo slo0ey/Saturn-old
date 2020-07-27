@@ -1,4 +1,4 @@
-package com.github.DenFade.Saturn.entity.annotation;
+package com.github.DenFade.Saturn.entity.annotation.command;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

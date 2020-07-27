@@ -1,19 +1,16 @@
 package com.github.DenFade.Saturn.event;
 
 import com.github.DenFade.Saturn.Bot;
-import com.github.DenFade.Saturn.center.DataBase;
-import com.github.DenFade.Saturn.database.ServerConfigurationDB;
-import com.github.DenFade.Saturn.entity.IGuildCommand;
-import com.github.DenFade.Saturn.entity.annotation.CommandProperties;
+import com.github.DenFade.Saturn.database.DataBase;
+import com.github.DenFade.Saturn.database.server.ServerConfigurationDB;
+import com.github.DenFade.Saturn.entity.command.IGuildCommand;
 import com.github.DenFade.Saturn.exception.NegativeUserException;
 import com.github.DenFade.Saturn.exception.NoSuchCommandException;
 import com.github.DenFade.Saturn.exception.NoSuchPermissionException;
 import com.github.DenFade.Saturn.exception.UnverifiedServerException;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -32,6 +29,7 @@ public class IGuildMessageReceivedEvent extends IEvent{
     private IGuildCommand command;
     private BiConsumer<Throwable, IGuildMessageReceivedEvent> handler;
     private Consumer<IGuildMessageReceivedEvent> success;
+    private ServerConfigurationDB.ServerConfiguration configuration;
 
     private IGuildMessageReceivedEvent(GuildMessageReceivedEvent event, Message message, User user, Member member, TextChannel textChannel, GuildChannel guildChannel, String[] splitted, String alias){
         this.event = event;
@@ -60,7 +58,10 @@ public class IGuildMessageReceivedEvent extends IEvent{
 
     public IGuildMessageReceivedEvent scanIfVerifiedServer(String serverId) throws UnverifiedServerException {
         boolean unverified = DataBase.serverConfigurationDB.extract(db -> db.isNull(serverId));
-        if(unverified) throw new UnverifiedServerException();
+        if(!alias.equals("saturn.init") && unverified) throw new UnverifiedServerException();
+        else {
+            if(!unverified) this.configuration = DataBase.serverConfigurationDB.toServer(serverId);
+        }
         return this;
     }
 
@@ -118,5 +119,13 @@ public class IGuildMessageReceivedEvent extends IEvent{
 
     public IGuildCommand getCommand() {
         return command;
+    }
+
+    public String[] getSplitted() {
+        return splitted;
+    }
+
+    public ServerConfigurationDB.ServerConfiguration getConfiguration(){
+        return configuration;
     }
 }

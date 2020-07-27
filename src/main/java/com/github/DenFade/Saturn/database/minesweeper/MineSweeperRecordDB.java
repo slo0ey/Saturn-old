@@ -1,9 +1,10 @@
-package com.github.DenFade.Saturn.database;
+package com.github.DenFade.Saturn.database.minesweeper;
 
+import com.github.DenFade.Saturn.database.IDB;
 import com.github.DenFade.Saturn.util.FileFormat;
 import org.json.JSONArray;
 
-public class MineSweeperRecordDB  implements  IDB<JSONArray> {
+public class MineSweeperRecordDB  implements IDB<JSONArray> {
 
     private JSONArray db;
 

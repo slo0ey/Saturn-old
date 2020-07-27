@@ -1,5 +1,6 @@
-package com.github.DenFade.Saturn.database;
+package com.github.DenFade.Saturn.database.server;
 
+import com.github.DenFade.Saturn.database.IDB;
 import com.github.DenFade.Saturn.util.FileFormat;
 import com.github.DenFade.Saturn.util.FileStream;
 import org.json.JSONObject;
@@ -7,7 +8,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PunishedUserDB implements IDB<JSONObject> {
 

@@ -1,5 +1,6 @@
-package com.github.DenFade.Saturn.database;
+package com.github.DenFade.Saturn.database.minesweeper;
 
+import com.github.DenFade.Saturn.database.IDB;
 import com.github.DenFade.Saturn.util.FileFormat;
 import com.github.DenFade.Saturn.util.FileStream;
 

@@ -1,5 +1,6 @@
-package com.github.DenFade.Saturn.database;
+package com.github.DenFade.Saturn.database.server;
 
+import com.github.DenFade.Saturn.database.IDB;
 import com.github.DenFade.Saturn.util.FileFormat;
 import com.github.DenFade.Saturn.util.FileStream;
 import com.github.DenFade.Saturn.util.Translator;
@@ -56,12 +57,44 @@ public class ServerConfigurationDB implements IDB<JSONObject> {
         return new ServerConfiguration(getDB(), serverId);
     }
 
+    public ServerConfiguration registerServer(String serverId, String ownerId, Translator.Language lang){
+        ServerConfiguration config = new ServerConfiguration(serverId, ownerId, lang);
+        update(db -> {
+            JSONObject server = new JSONObject();
+            server.put("ownerId", ownerId);
+            server.put("language", lang.getLang());
+            db.put(serverId, server);
+
+            return db;
+        });
+        return config;
+    }
+
     public static class ServerConfiguration {
 
-        private final Translator.Language lang;
+        private final String id;
+        private String ownerId;
+        private Translator.Language lang;
 
         ServerConfiguration(JSONObject server, String serverId){
-            this.lang = Translator.Language.keyToLang(server.getJSONObject(serverId).getString("language"));
+            JSONObject serverObj = server.getJSONObject(serverId);
+            this.id = serverId;
+            this.ownerId = serverObj.getString("ownerId");
+            this.lang = Translator.Language.keyToLang(serverObj.getString("language"));
+        }
+
+        ServerConfiguration(String serverId, String ownerId, Translator.Language lang){
+            this.id = serverId;
+            this.ownerId = ownerId;
+            this.lang = lang;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getOwnerId() {
+            return ownerId;
         }
 
         public Translator.Language getLang() {

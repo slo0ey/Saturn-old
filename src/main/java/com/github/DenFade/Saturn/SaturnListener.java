@@ -1,7 +1,7 @@
 package com.github.DenFade.Saturn;
 
-import com.github.DenFade.Saturn.entity.annotation.CommandProperties;
-import com.github.DenFade.Saturn.entity.annotation.CommandTest;
+import com.github.DenFade.Saturn.entity.annotation.command.CommandProperties;
+import com.github.DenFade.Saturn.entity.annotation.command.CommandTest;
 import com.github.DenFade.Saturn.event.IGuildMessageReceivedEvent;
 import com.github.DenFade.Saturn.exception.NegativeUserException;
 import com.github.DenFade.Saturn.exception.NoSuchCommandException;
@@ -9,8 +9,8 @@ import com.github.DenFade.Saturn.exception.NoSuchPermissionException;
 import com.github.DenFade.Saturn.exception.UnverifiedServerException;
 import com.github.DenFade.Saturn.util.EmojiFactory;
 import com.github.DenFade.Saturn.util.PermissionLevel;
-
 import com.github.DenFade.Saturn.util.Translator;
+
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -19,13 +19,14 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
 import org.json.JSONObject;
 
 import javax.annotation.Nonnull;
 
 import java.util.List;
 
-public class STListener extends ListenerAdapter {
+public class SaturnListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
@@ -82,16 +83,15 @@ public class STListener extends ListenerAdapter {
                     })
                     .execute();
         } catch (NegativeUserException e) {
-            e.printStackTrace();
+            //TODO: Need to handle
         } catch (UnverifiedServerException e) {
-            e.printStackTrace();
             Translator.doOnTranslate(Translator.Language.EN, "unverified_server", channel, (s, textChannel) -> {
                 textChannel.sendMessage(s).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
             });
         } catch (NoSuchCommandException e) {
-            e.printStackTrace();
+            //TODO: Need to handle
         } catch (NoSuchPermissionException e) {
-            e.printStackTrace();
+            channel.sendMessage(String.format("**You don't have permission to use!** %s", EmojiFactory.ANGRY_FACE.getEmoji())).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
         }
     }
 

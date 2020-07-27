@@ -1,13 +1,12 @@
 package com.github.DenFade.Saturn.entity.command;
 
-import com.github.DenFade.Saturn.entity.IGuildCommand;
+import com.github.DenFade.Saturn.entity.IEntity;
 import com.github.DenFade.Saturn.event.IGuildMessageReceivedEvent;
 
-public class OpenMSTile extends IGuildCommand {
+public class IGuildCommand extends IEntity {
 
-    @Override
     public void run(IGuildMessageReceivedEvent event) {
-        super.run(event);
+
     }
 
 }

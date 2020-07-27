@@ -1,4 +1,4 @@
-package com.github.DenFade.Saturn.entity.annotation;
+package com.github.DenFade.Saturn.entity.annotation.command;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static  java.lang.annotation.ElementType.TYPE;

@@ -26,6 +26,10 @@ public class ICenter<K, V>{
         return map.get(key);
     }
 
+    public boolean has(K key){
+        return map.containsKey(key);
+    }
+
     public int size(){
         return map.size();
     }

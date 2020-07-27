@@ -3,6 +3,8 @@ package com.github.DenFade.Saturn.util;
 public enum EmojiFactory {
 
     SAD_BUT_RELIEVED_FACE(0x1f625),
+    ANGRY_FACE(0x1f620),
+    ANGRY_FACE_WITH_HORNS(0x1f47f),
     GRINNING_FACE(0x1f600),
     WHITE_CHECK_MARK(0x2705),
     CONFUSED_FACE(0x1f615);

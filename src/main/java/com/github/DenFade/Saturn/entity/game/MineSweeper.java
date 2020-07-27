@@ -10,21 +10,25 @@ import java.util.function.BiFunction;
 
 public class MineSweeper extends IEntity {
 
-    private int x;
-    private int y;
-    private int b;
-    private int size;
+    private final int x;
+    private final int y;
+    private final int b;
+    private final int size;
     private boolean end = false;
-    private Cell[][] table;
+    private final Cell[][] table;
     private static final int BOMB = 9;
     private static final int[][] around = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 
-    public MineSweeper(int x, int y, int b){
+    private final String ownerId;
+    private String messageId;
+
+    public MineSweeper(int x, int y, int b, String ownerId){
         this.x = x;
         this.y = y;
         this.b = b;
         this.size = x*y;
-        this.table = new Cell[x][y];
+        this.table = new Cell[y][x];
+        this.ownerId = ownerId;
         for(int i = 0; i < this.y; i++){
             for(int k = 0; k < this.x; k++){
                 this.table[i][k] = new Cell(0, false, false);
@@ -111,6 +115,18 @@ public class MineSweeper extends IEntity {
                 this.table[y][x].flag = !cur.flag;
             }
         }
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
     private static class Cell{

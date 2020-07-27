@@ -1,8 +1,8 @@
-package com.github.DenFade.Saturn.center;
+package com.github.DenFade.Saturn.database;
 
-import com.github.DenFade.Saturn.database.MineSweeperChannelDB;
-import com.github.DenFade.Saturn.database.PunishedUserDB;
-import com.github.DenFade.Saturn.database.ServerConfigurationDB;
+import com.github.DenFade.Saturn.database.minesweeper.MineSweeperChannelDB;
+import com.github.DenFade.Saturn.database.server.PunishedUserDB;
+import com.github.DenFade.Saturn.database.server.ServerConfigurationDB;
 
 public class DataBase {
 
