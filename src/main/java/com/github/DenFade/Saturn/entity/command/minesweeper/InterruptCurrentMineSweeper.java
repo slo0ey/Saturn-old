@@ -38,7 +38,7 @@ public class InterruptCurrentMineSweeper extends IGuildCommand {
                 if(ms.getOwnerId().equals(userId)){
                     final String messageId = Bot.minesweeperCenter().find(mergedIds).getMessageId();
                     Translator.doOnTranslate(event.getConfiguration().getLang(), new String[]{"ms_stop_endgame", "ms_ongoing_script"}, event, (s, ievent) -> {
-                        ievent.getTextChannel().sendMessage(s[0]).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
+                        ievent.getTextChannel().sendMessage(String.format(s[0], EmojiFactory.CONFUSED_FACE.getEmoji())).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
                         ievent.getTextChannel().deleteMessageById(messageId).queue();
                         ievent.getTextChannel().sendMessage(String.format(s[1], ms.getX(), ms.getY(), ms.getBomb(), EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), ms.getRate(), "CANCELED", ms.display(MineSweeper.Display.ONGOING, 0, 0), ms.getLeftBomb(), ms.getParticipants().size(), Utils.timeIndicator(System.currentTimeMillis() - ms.getStartAt()))).queue();
 
@@ -46,7 +46,7 @@ public class InterruptCurrentMineSweeper extends IGuildCommand {
                     });
                 } else {
                     Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_stop_no_permission", event, (s, ievent) -> {
-                        ievent.getTextChannel().sendMessage(s).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
+                        ievent.getTextChannel().sendMessage(String.format(s, EmojiFactory.ANGRY_FACE.getEmoji())).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
                     });
                 }
             } else {

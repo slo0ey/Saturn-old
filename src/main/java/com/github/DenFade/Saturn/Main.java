@@ -41,6 +41,7 @@ public class Main {
                     .register("ms.on", new RegisterMineSweeperChannel())
                     .register("ms.off", new UnregisterMineSweeperChannel())
                     .register("ms.new", new CreateNewMineSweeper())
+                    .register("ms.stop", new InterruptCurrentMineSweeper())
                     .register("ms.o", new OpenTileCurrentMineSweeper())
                     .register("ms.f", new FlaggingTileCurrentMineSweeper())
                     .register("ms.r", new RetrieveCurrentMineSweeper());
