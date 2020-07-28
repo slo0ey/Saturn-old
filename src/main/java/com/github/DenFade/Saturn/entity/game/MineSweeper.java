@@ -4,10 +4,12 @@ import com.github.DenFade.Saturn.entity.IEntity;
 import com.github.DenFade.Saturn.util.EmojiFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 public class MineSweeper extends IEntity {
 
@@ -20,7 +22,7 @@ public class MineSweeper extends IEntity {
     private final Cell[][] table;
     private static final int BOMB = 9;
     private static final int[][] around = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-    private static final String[] emoji = {EmojiFactory.BLUE_SQUARE.getEmoji(), ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:",":eight:", EmojiFactory.BOMB.getEmoji(), EmojiFactory.TRIANGULAR_FLAG_ON_POST.getEmoji(), EmojiFactory.WHITE_LARGE_SQUARE.getEmoji(), EmojiFactory.COLLISION.getEmoji()};
+    private static final String[] emoji = {EmojiFactory.BLUE_SQUARE.getEmoji(), ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:",":eight:", EmojiFactory.BOMB.getEmoji(), EmojiFactory.TRIANGULAR_FLAG_ON_POST.getEmoji(), EmojiFactory.WHITE_LARGE_SQUARE.getEmoji(), EmojiFactory.COLLISION.getEmoji(), ":x:"};
 
     private final String ownerId;
     private String messageId;
@@ -54,7 +56,7 @@ public class MineSweeper extends IEntity {
     }
 
     protected int[] splitC(int xy){
-        return (new int[]{xy%this.y, xy/this.y});
+        return (new int[]{xy%this.x, xy/this.x});
     }
 
     protected int sumC(int x, int y){
@@ -69,13 +71,13 @@ public class MineSweeper extends IEntity {
         }
     }
 
-    protected int access3x3s(int x, int y, BiFunction<Integer, Integer, Boolean> task){
+    protected int access3x3s(int x, int y, BiPredicate<Integer, Integer> task){
         int s = 0;
         for(int[] r : around){
             int nx = x + r[0];
             int ny = y + r[1];
             if(isSafe(nx, ny)) {
-                if(task.apply(nx, ny)) s++;
+                if(task.test(nx, ny)) s++;
             }
         }
         return s;
@@ -97,31 +99,37 @@ public class MineSweeper extends IEntity {
         }
     }
 
-    public Display open(int x, int y){
+    public Display open(int x, int y, boolean ignore){
         if(!isSafe(x, y)) return Display.ONGOING;
-        else if(this.table[y][x].opened){
-            if(this.table[y][x].tile > 0 && this.table[y][x].tile < 9){
-                int count = access3x3s(x, y, (nx, ny) -> this.table[ny][nx].flag);
-                if(count == this.table[y][x].tile){
-                    access3x3(x, y, (cx, cy) -> {
-                        if(!this.table[cy][cx].flag) open(cx, cy);
-                    });
+
+        Cell current = this.table[y][x];
+        if(current.opened){
+            if(ignore || current.tile == 0) return Display.ONGOING;
+            else if(0 < current.tile && current.tile < 9){
+                int flags = this.access3x3s(x, y, (nx, ny) -> {
+                    Cell current2 = this.table[ny][nx];
+                    return current2.flag && !current2.opened;
+                });
+                if(flags == current.tile){
+                    this.table[y][x].opened = true;
+                    access3x3(x, y, (cx, cy) -> open(cx, cy, true));
+                    return Display.ONGOING;
                 }
             }
             return Display.ONGOING;
         } else {
-            if(this.table[y][x].tile == BOMB){
+            if(current.tile == BOMB){
+                if(current.flag) return Display.ONGOING;
                 this.die = true;
                 return Display.DIED;
-            } else if(this.table[y][x].tile == 0){
-                this.table[y][x].opened = true;
+            } else if(current.tile == 0){
                 leftTile--;
-                access3x3(x, y, this::open);
+                this.table[y][x].opened = true;
+                access3x3(x, y, (cx, cy) -> open(cx, cy, true));
             } else {
-                this.table[y][x].opened = true;
                 leftTile--;
+                this.table[y][x].opened = true;
             }
-
             return leftTile == 0 ? Display.COMPLETED : Display.ONGOING;
         }
     }
@@ -144,7 +152,7 @@ public class MineSweeper extends IEntity {
         }
     }
 
-    public String display(Display mode){
+    public String display(Display mode, int x, int y){
         StringBuilder dis = new StringBuilder();
         for (int i = 0; i < this.y; i++) {
             dis.append("\n");
@@ -159,14 +167,15 @@ public class MineSweeper extends IEntity {
                         }
                         break;
                     case DIED:
-                        if((current.opened && current.tile == BOMB) || (current.flag && current.tile != BOMB)) dis.append(emoji[12]);
+                        if(current.tile != BOMB && current.flag) dis.append(emoji[13]);
+                        else if(current.tile == BOMB && i == y && j == x) dis.append(emoji[12]);
                         else {
                             if(current.flag) dis.append(emoji[10]);
                             else dis.append(emoji[current.tile]);
                         }
                         break;
                     case COMPLETED:
-                        dis.append(current.flag ? emoji[10] : emoji[current.tile]);
+                        dis.append(current.tile == BOMB ? emoji[10] : emoji[current.tile]);
                         break;
                 }
             }
@@ -196,6 +205,10 @@ public class MineSweeper extends IEntity {
 
     public int getLeftBomb() {
         return leftBomb;
+    }
+
+    public boolean isDie() {
+        return die;
     }
 
     public List<String> getParticipants() {
@@ -258,7 +271,6 @@ public class MineSweeper extends IEntity {
 
     public enum Display{
         ONGOING, DIED, COMPLETED;
-
 
         @Override
         public String toString() {

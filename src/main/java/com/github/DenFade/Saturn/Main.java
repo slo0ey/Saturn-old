@@ -1,12 +1,9 @@
 package com.github.DenFade.Saturn;
 
-import com.github.DenFade.Saturn.entity.command.minesweeper.CreateNewMineSweeper;
-import com.github.DenFade.Saturn.entity.command.minesweeper.OpenTileInMineSweeper;
+import com.github.DenFade.Saturn.entity.command.minesweeper.*;
 import com.github.DenFade.Saturn.entity.command.server.ChangeServerLanguage;
 import com.github.DenFade.Saturn.entity.command.server.InitServerConfiguration;
-import com.github.DenFade.Saturn.entity.command.minesweeper.RegisterMineSweeperChannel;
 
-import com.github.DenFade.Saturn.entity.command.minesweeper.UnregisterMineSweeperChannel;
 import com.github.DenFade.Saturn.util.Translator;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -44,7 +41,9 @@ public class Main {
                     .register("ms.on", new RegisterMineSweeperChannel())
                     .register("ms.off", new UnregisterMineSweeperChannel())
                     .register("ms.new", new CreateNewMineSweeper())
-                    .register("ms.o", new OpenTileInMineSweeper());
+                    .register("ms.o", new OpenTileCurrentMineSweeper())
+                    .register("ms.f", new FlaggingTileCurrentMineSweeper())
+                    .register("ms.r", new RetrieveCurrentMineSweeper());
             logWithTimestamp("Successful injection\n%d GuildCommand now available", Bot.commandCenter().size());
 
 

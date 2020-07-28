@@ -15,14 +15,13 @@ import com.github.DenFade.Saturn.util.Utils;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-
 @CommandProperties(level = PermissionLevel.VERIFIED)
 @CommandDoc(
-        alias = "ms.o",
-        preview = "x y 좌표의 타일을 깜"
+        alias = "ms.f",
+        preview = "타일에 깃발 설치"
 )
 @SuppressWarnings("ConstantConditions")
-public class OpenTileInMineSweeper extends IGuildCommand {
+public class FlaggingTileCurrentMineSweeper extends IGuildCommand {
 
     @Override
     public void run(IGuildMessageReceivedEvent event) {
@@ -41,29 +40,29 @@ public class OpenTileInMineSweeper extends IGuildCommand {
             if(Bot.minesweeperCenter().has(mergedIds)){
                 final MineSweeper ms = Bot.minesweeperCenter().find(mergedIds);
                 final String messageId = Bot.minesweeperCenter().find(mergedIds).getMessageId();
-
-                if(splitted.length < 3) return;
-                else {
-                    int x, y;
+                if(splitted.length == 3){
+                    final int x, y;
                     try {
-                        x = Integer.parseInt(splitted[1]) - 1;
-                        y = Integer.parseInt(splitted[2]) - 1;
-                    } catch (NumberFormatException e){
-                        return;
-                    }
-                    if(!ms.isSafe(x, y)) return;
-                    else {
-                        if(!ms.getParticipants().contains(userId)) ms.addParticipants(userId);
-                        MineSweeper.Display display = ms.open(x, y);
-                        Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_ongoing_script", event, (s, ievent) -> {
-                            event.getTextChannel().editMessageById(messageId, String.format(s, ms.getX(), ms.getY(), ms.getBomb(), EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), ms.getRate(), display.name(), ms.display(display), ms.getLeftBomb(), ms.getParticipants().size(), Utils.timeIndicator(System.currentTimeMillis() - ms.getStartAt()))).queue();
-                            Bot.minesweeperCenter().register(mergedIds, ms);
-                        });
+                        x = Integer.parseInt(splitted[1])-1;
+                        y = Integer.parseInt(splitted[2])-1;
+                        if(ms.isSafe(x, y)){
+                            MineSweeper.Display display = MineSweeper.Display.ONGOING;
+                            ms.flagging(x, y);
+                            Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_ongoing_script", event, (s, ievent) -> {
+                                ievent.getTextChannel().editMessageById(messageId,
+                                        String.format(s, ms.getX(), ms.getY(), ms.getBomb(), EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), ms.getRate(), display, ms.display(display, 0, 0), ms.getLeftBomb(), ms.getParticipants().size(), Utils.timeIndicator(System.currentTimeMillis() - ms.getStartAt()))
+                                ).queue();
+
+                                Bot.minesweeperCenter().register(mergedIds, ms);
+                            });
+                        }
+                    } catch (NumberFormatException ignored){
+                        //Empty..
                     }
                 }
             } else {
                 Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_open_no_game", event, (s, ievent) -> {
-                    event.getTextChannel().sendMessage(String.format(s, EmojiFactory.CONFUSED_FACE.getEmoji())).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
+                    ievent.getTextChannel().sendMessage(String.format(s, EmojiFactory.CONFUSED_FACE.getEmoji())).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
                 });
             }
         } else {
@@ -72,5 +71,4 @@ public class OpenTileInMineSweeper extends IGuildCommand {
             });
         }
     }
-
 }

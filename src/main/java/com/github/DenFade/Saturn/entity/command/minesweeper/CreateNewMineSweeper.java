@@ -79,7 +79,7 @@ public class CreateNewMineSweeper extends IGuildCommand {
                 Translator.doOnTranslate(event.getConfiguration().getLang(), new String[]{"ms_start_create_new", "ms_ongoing_script"}, event, (s, ievent) -> {
                     ievent.getTextChannel().sendMessage(String.format(s[0], EmojiFactory.TRIANGULAR_FLAG_ON_POST.getEmoji())).queue();
                     ievent.getTextChannel().sendMessage(
-                            String.format(s[1], ms.getX(), ms.getY(), ms.getBomb(), EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), ms.getRate(), display, ms.display(display), ms.getLeftBomb(), 1, "0s"))
+                            String.format(s[1], ms.getX(), ms.getY(), ms.getBomb(), EmojiFactory.ANGRY_FACE_WITH_HORNS.getEmoji(), ms.getRate(), display, ms.display(display, 0, 0), ms.getLeftBomb(), 1, "0s"))
                                 .queueAfter(3000, TimeUnit.MILLISECONDS, m -> {
                                     String id = m.getId();
                                     ms.setMessageId(id);
@@ -88,7 +88,7 @@ public class CreateNewMineSweeper extends IGuildCommand {
                 Bot.minesweeperCenter().register(mergedIds, ms);
             } else {
                 Translator.doOnTranslate(event.getConfiguration().getLang(), "ms_start_already_started", event, (s, ievent) -> {
-                    ievent.getTextChannel().sendMessage(String.format(s, EmojiFactory.CONFUSED_FACE.getEmoji())).queue();
+                    ievent.getTextChannel().sendMessage(String.format(s, EmojiFactory.CONFUSED_FACE.getEmoji())).queue(m -> m.addReaction(EmojiFactory.WHITE_CHECK_MARK.getEmoji()).queue());
                 });
             }
         } else {
