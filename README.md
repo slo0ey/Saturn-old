@@ -30,7 +30,7 @@ You can invite 🪐 `Saturn` 🪐 in your server [Here!](https://discord.com/api
 
 ## 🕹️ Commands 🕹️
 
-- The **prefix** of every command is, `!!`or `?` is.
+- The **prefix** of every command is, `!!`or `??` is.
 - 👑: Only **ADMIN** or **Owner**, 😎: Only **VERIFIED** user, 😆: All user available
 - ⚒️: Only **Developer** available ❓❗
 
