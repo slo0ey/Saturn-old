@@ -88,10 +88,10 @@ You can invite 🪐 `Saturn` 🪐 in your server [Here!](https://discord.com/api
 - Issues, Pull Requests always welcome 😀
 - If you have any questions, contact me on discord below 🤔
 
-**Repository:** Created by `DenFade`
+**Repository:** Created by `acceler8tion`
 
-**README.md:** Written by `DenFade`
+**README.md:** Written by `acceler8tion`
 
 </br>
 
-Here is my **discord** tag: ```DenFade#3350```
+Here is my **discord** tag: ```Acceler8tionAsDf#3350```
