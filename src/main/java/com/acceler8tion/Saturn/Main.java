@@ -50,7 +50,7 @@ public class Main {
 
 
             logWithTimestamp("Connecting Discord...");
-            JDA jda = JDABuilder.createDefault(p.getProperty("token"))
+            JDABuilder.createDefault(p.getProperty("token"))
                     .addEventListeners(new SaturnListener())
                     .setActivity(Activity.of(Activity.ActivityType.DEFAULT, p.getProperty("activity-desc")))
                     .setStatus(OnlineStatus.ONLINE)
