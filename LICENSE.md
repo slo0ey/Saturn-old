@@ -39,7 +39,7 @@ know their rights.
 
   Developers that use the GNU GPL protect your rights with two steps:
 (1) assert copyright on the software, and (2) offer you this License
-giving you legal permission to copy, distribute and/or modify it.
+giving you legal permission to copy, distribute, and/or modify it.
 
   For the developers' and authors' protection, the GPL clearly explains
 that there is no warranty for this free software.  For both users' and
@@ -49,8 +49,7 @@ authors of previous versions.
 
   Some devices are designed to deny users access to install or run
 modified versions of the software inside them, although the manufacturer
-can do so.  This is fundamentally incompatible with the aim of
-protecting users' freedom to change the software.  The systematic
+can do so.  This is fundamentally incompatible to protect users' freedom to change the software.  The systematic
 pattern of such abuse occurs in the area of products for individuals to
 use, which is precisely where it is most unacceptable.  Therefore, we
 have designed this version of the GPL to prohibit the practice for those
@@ -59,7 +58,7 @@ stand ready to extend this provision to those domains in future versions
 of the GPL, as needed to protect the freedom of users.
 
   Finally, every program is threatened constantly by software patents.
-States should not allow patents to restrict development and use of
+States should not allow patents to restrict the development and use of
 software on general-purpose computers, but in those that do, we wish to
 avoid the special danger that patents applied to a free program could
 make it effectively proprietary.  To prevent this, the GPL assures that
@@ -102,9 +101,9 @@ a computer network, with no transfer of a copy, is not conveying.
 
   An interactive user interface displays "Appropriate Legal Notices"
 to the extent that it includes a convenient and prominently visible
-feature that (1) displays an appropriate copyright notice, and (2)
+the feature that (1) displays an appropriate copyright notice, and (2)
 tells the user that there is no warranty for the work (except to the
-extent that warranties are provided), that licensees may convey the
+the extent that warranties are provided), that licensees may convey the
 work under this License, and how to view a copy of this License.  If
 the interface presents a list of user commands or options, such as a
 menu, a prominent item in the list meets this criterion.
@@ -113,7 +112,7 @@ menu, a prominent item in the list meets this criterion.
 
   The "source code" for a work means the preferred form of the work
 for making modifications to it.  "Object code" means any non-source
-form of a work.
+form of work.
 
   A "Standard Interface" means an interface that either is an official
 standard defined by a recognized standards body, or, in the case of
@@ -121,9 +120,9 @@ interfaces specified for a particular programming language, one that
 is widely used among developers working in that language.
 
   The "System Libraries" of an executable work include anything, other
-than the work as a whole, that (a) is included in the normal form of
+then the work as a whole, that (a) is included in the normal form of
 packaging a Major Component, but which is not part of that Major
-Component, and (b) serves only to enable use of the work with that
+Component and (b) serves only to enable the use of the work with that
 Major Component, or to implement a Standard Interface for which an
 implementation is available to the public in source code form.  A
 "Major Component", in this context, means a major essential component
@@ -154,12 +153,12 @@ same work.
   2. Basic Permissions.
 
   All rights granted under this License are granted for the term of
-copyright on the Program, and are irrevocable provided the stated
+copyright on the Program and are irrevocable provided the stated
 conditions are met.  This License explicitly affirms your unlimited
 permission to run the unmodified Program.  The output from running a
 covered work is covered by this License only if the output, given its
 content, constitutes a covered work.  This License acknowledges your
-rights of fair use or other equivalent, as provided by copyright law.
+rights of fair use or another equivalent, as provided by copyright law.
 
   You may make, run and propagate covered works that you do not
 convey, without conditions so long as your license otherwise remains
@@ -186,8 +185,8 @@ measures.
 
   When you convey a covered work, you waive any legal power to forbid
 circumvention of technological measures to the extent such circumvention
-is effected by exercising rights under this License with respect to
-the covered work, and you disclaim any intention to limit operation or
+is effected by exercising rights under this License concerning
+the covered work and you disclaim any intention to limit operation or
 modification of the work as a means of enforcing, against the work's
 users, your or third parties' legal rights to forbid circumvention of
 technological measures.
@@ -199,7 +198,7 @@ receive it, in any medium, provided that you conspicuously and
 appropriately publish on each copy an appropriate copyright notice;
 keep intact all notices stating that this License and any
 non-permissive terms added in accord with section 7 apply to the code;
-keep intact all notices of the absence of any warranty; and give all
+keep intact all notices of the absence of any warranty, and give all
 recipients a copy of this License along with the Program.
 
   You may charge any price or no price for each copy that you convey,
@@ -211,8 +210,7 @@ and you may offer support or warranty protection for a fee.
 produce it from the Program, in the form of source code under the
 terms of section 4, provided that you also meet all of these conditions:
 
-    a) The work must carry prominent notices stating that you modified
-    it, and giving a relevant date.
+    a) The work must carry prominent notices stating that you modified it, and giving a relevant date.
 
     b) The work must carry prominent notices stating that it is
     released under this License and any conditions added under section
@@ -221,11 +219,9 @@ terms of section 4, provided that you also meet all of these conditions:
 
     c) You must license the entire work, as a whole, under this
     License to anyone who comes into possession of a copy.  This
-    License will therefore apply, along with any applicable section 7
+    The license will therefore apply, along with any applicable section 7
     additional terms, to the whole of the work, and all its parts,
-    regardless of how they are packaged.  This License gives no
-    permission to license the work in any other way, but it does not
-    invalidate such permission if you have separately received it.
+    regardless of how they are packaged.  This License does not permit to license the work in any other way, but it does not invalidate such permission if you have separately received it.
 
     d) If the work has interactive user interfaces, each must display
     Appropriate Legal Notices; however, if the Program has interactive
@@ -260,15 +256,14 @@ in one of these ways:
     long as you offer spare parts or customer support for that product
     model, to give anyone who possesses the object code either (1) a
     copy of the Corresponding Source for all the software in the
-    product that is covered by this License, on a durable physical
+    the product that is covered by this License, on a durable physical
     medium customarily used for software interchange, for a price no
     more than your reasonable cost of physically performing this
     conveying of source, or (2) access to copy the
     Corresponding Source from a network server at no charge.
 
     c) Convey individual copies of the object code with a copy of the
-    written offer to provide the Corresponding Source.  This
-    alternative is allowed only occasionally and noncommercially, and
+    written offer to provide the Corresponding Source.  This  alternative is allowed only occasionally and noncommercially, and
     only if you received the object code with such an offer, in accord
     with subsection 6b.
 
@@ -278,7 +273,7 @@ in one of these ways:
     further charge.  You need not require recipients to copy the
     Corresponding Source along with the object code.  If the place to
     copy the object code is a network server, the Corresponding Source
-    may be on a different server (operated by you or a third party)
+    maybe on a different server (operated by you or a third party)
     that supports equivalent copying facilities, provided you maintain
     clear directions next to the object code saying where to find the
     Corresponding Source.  Regardless of what server hosts the
@@ -301,10 +296,10 @@ into a dwelling.  In determining whether a product is a consumer product,
 doubtful cases shall be resolved in favor of coverage.  For a particular
 product received by a particular user, "normally used" refers to a
 typical or common use of that class of product, regardless of the status
-of the particular user or of the way in which the particular user
-actually uses, or expects or is expected to use, the product.  A product
+of the particular user or of how the particular user
+uses, or expects or is expected to use, the product.  A product
 is a consumer product regardless of whether the product has substantial
-commercial, industrial or non-consumer uses, unless such uses represent
+commercial, industrial, or non-consumer uses unless such uses represent
 the only significant mode of use of the product.
 
   "Installation Information" for a User Product means any methods,
@@ -320,14 +315,14 @@ specifically for use in, a User Product, and the conveying occurs as
 part of a transaction in which the right of possession and use of the
 User Product is transferred to the recipient in perpetuity or for a
 fixed term (regardless of how the transaction is characterized), the
-Corresponding Source conveyed under this section must be accompanied
+The corresponding Source conveyed under this section must be accompanied
 by the Installation Information.  But this requirement does not apply
 if neither you nor any third party retains the ability to install
 modified object code on the User Product (for example, the work has
 been installed in ROM).
 
   The requirement to provide Installation Information does not include a
-requirement to continue to provide support service, warranty, or updates
+the requirement to continue to provide support service, warranty, or updates
 for a work that has been modified or installed by the recipient, or for
 the User Product in which it has been modified or installed.  Access to a
 network may be denied when the modification itself materially and
@@ -338,13 +333,13 @@ protocols for communication across the network.
 in accord with this section must be in a format that is publicly
 documented (and with an implementation available to the public in
 source code form), and must require no special password or key for
-unpacking, reading or copying.
+unpacking, reading, or copying.
 
   7. Additional Terms.
 
   "Additional permissions" are terms that supplement the terms of this
 License by making exceptions from one or more of its conditions.
-Additional permissions that are applicable to the entire Program shall
+Additional permissions that apply to the entire Program shall
 be treated as though they were included in this License, to the extent
 that they are valid under applicable law.  If additional permissions
 apply only to part of the Program, that part may be used separately
@@ -352,13 +347,13 @@ under those permissions, but the entire Program remains governed by
 this License without regard to the additional permissions.
 
   When you convey a copy of a covered work, you may at your option
-remove any additional permissions from that copy, or from any part of
-it.  (Additional permissions may be written to require their own
+remove any additional permissions from that copy, or any part of
+it.  (Additional permissions may be written to require their 
 removal in certain cases when you modify the work.)  You may place
 additional permissions on material, added by you to a covered work,
 for which you have or can give appropriate copyright permission.
 
-  Notwithstanding any other provision of this License, for material you
+  Notwithstanding any other provision of this License, for the material you
 add to a covered work, you may (if authorized by the copyright holders of
 that material) supplement the terms of this License with terms:
 
@@ -366,7 +361,7 @@ that material) supplement the terms of this License with terms:
     terms of sections 15 and 16 of this License; or
 
     b) Requiring preservation of specified reasonable legal notices or
-    author attributions in that material or in the Appropriate Legal
+    author attributions in that material or the Appropriate Legal
     Notices displayed by works containing it; or
 
     c) Prohibiting misrepresentation of the origin of that material, or
@@ -387,7 +382,7 @@ that material) supplement the terms of this License with terms:
 
   All other non-permissive additional terms are considered "further
 restrictions" within the meaning of section 10.  If the Program as you
-received it, or any part of it, contains a notice stating that it is
+received it, or any part of it contains a notice stating that it is
 governed by this License along with a term that is a further
 restriction, you may remove that term.  If a license document contains
 a further restriction but permits relicensing or conveying under this
@@ -417,13 +412,13 @@ license from a particular copyright holder is reinstated (a)
 provisionally, unless and until the copyright holder explicitly and
 finally terminates your license, and (b) permanently, if the copyright
 holder fails to notify you of the violation by some reasonable means
-prior to 60 days after the cessation.
+before 60 days after the cessation.
 
   Moreover, your license from a particular copyright holder is
 reinstated permanently if the copyright holder notifies you of the
 violation by some reasonable means, this is the first time you have
 received notice of violation of this License (for any work) from that
-copyright holder, and you cure the violation prior to 30 days after
+copyright holder and you cure the violation before 30 days after
 your receipt of the notice.
 
   Termination of your rights under this section does not terminate the
@@ -434,7 +429,7 @@ material under section 10.
 
   9. Acceptance Not Required for Having Copies.
 
-  You are not required to accept this License in order to receive or
+  You are not required to accept this License to receive or
 run a copy of the Program.  Ancillary propagation of a covered work
 occurring solely as a consequence of using peer-to-peer transmission
 to receive a copy likewise does not require acceptance.  However,
@@ -519,7 +514,7 @@ you grant is automatically extended to all recipients of the covered
 work and works based on it.
 
   A patent license is "discriminatory" if it does not include within
-the scope of its coverage, prohibits the exercise of, or is
+the scope of its coverage, prohibits the exercise of or is
 conditioned on the non-exercise of one or more of the rights that are
 specifically granted under this License.  You may not convey a covered
 work if you are a party to an arrangement with a third party that is
@@ -531,7 +526,7 @@ patent license (a) in connection with copies of the covered work
 conveyed by you (or copies made from those copies), or (b) primarily
 for and in connection with specific products or compilations that
 contain the covered work, unless you entered into that arrangement,
-or that patent license was granted, prior to 28 March 2007.
+or that patent license was granted, before 28 March 2007.
 
   Nothing in this License shall be construed as excluding or limiting
 any implied license or other defenses to infringement that may
@@ -542,7 +537,7 @@ otherwise be available to you under applicable patent law.
   If conditions are imposed on you (whether by court order, agreement or
 otherwise) that contradict the conditions of this License, they do not
 excuse you from the conditions of this License.  If you cannot convey a
-covered work so as to satisfy simultaneously your obligations under this
+covered work to satisfy simultaneously your obligations under this
 License and any other pertinent obligations, then as a consequence you may
 not convey it at all.  For example, if you agree to terms that obligate you
 to collect a royalty for further conveying from those to whom you convey
@@ -564,7 +559,7 @@ combination as such.
 
   The Free Software Foundation may publish revised and/or new versions of
 the GNU General Public License from time to time.  Such new versions will
-be similar in spirit to the present version, but may differ in detail to
+be similar in spirit to the present version but may differ in detail to
 address new problems or concerns.
 
   Each version is given a distinguishing version number.  If the
@@ -628,7 +623,7 @@ free software which everyone can redistribute and change under these terms.
 
   To do so, attach the following notices to the program.  It is safest
 to attach them to the start of each source file to most effectively
-state the exclusion of warranty; and each file should have at least
+state the exclusion of warranty, and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
     <one line to give the program's name and a brief idea of what it does.>
@@ -644,10 +639,9 @@ the "copyright" line and a pointer to where the full notice is found.
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-Also add information on how to contact you by electronic and paper mail.
+Also, additional information on how to contact you by electronic and paper mail.
 
   If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:
